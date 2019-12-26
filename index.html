@@ -1,0 +1,856 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<!-- META TAGS -->
+	<meta charset="utf-8">
+	<meta author="Sumit Anand">
+	<meta date-created="23-Dec-2019">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<title>Product Page</title>
+	<!-- FONTS -->
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
+	<link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
+	<!-- EXTERNAL CSS -->
+	<link rel="stylesheet" type="text/css" href="files/bootstrap-4.4.1/css/bootstrap.min.css">
+	<link href="https://cdn.jsdelivr.net/npm/select2@4.0.12/dist/css/select2.min.css" rel="stylesheet" />
+	<!-- INTERNAL CSS -->
+	<style type="text/css">
+		*{
+			font-family: 'Open Sans', sans-serif;
+			font-size: 1rem;
+		}
+		.navbar{
+			background-color: #ffd900;
+		}
+		.navbar-custom{
+			background-color: #ffd900;
+			color: #444444;
+		}
+		.navbar-custom .navbar-nav .nav-link,
+		.navbar-custom .navbar-nav .nav-link:hover{
+			text-decoration: none;
+			color: #145dbc;
+			font-size: 0.9rem;
+			font-weight: normal;
+
+		}
+		.navbar-nav{
+			margin-left: 2rem;
+		}
+		.form-inline a{
+			background-color: #ffd900;
+			font-size: 0.9rem;
+			font-weight: normal;
+			color: #145dbc;
+			padding-right: 1rem;
+			text-decoration: none;
+		}
+		.searchLocationOverlay{
+			display: none;
+			position: absolute;
+			top: 3.5rem;
+			right: 4rem;
+			z-index: 100;
+			width: 13rem;
+			height: 5rem;
+			background-color: #FFF;
+			box-shadow: 2px 2px #c0c3c4;
+			text-align: center;
+		}
+		.searchLocationOverlay select{
+			outline: 0;
+			border-width: 0 0 2px;
+  			border-color: blue
+			font-size: 0.5rem;
+			font-weight: normal;
+			color: #145dbc;
+			text-align: center;
+		}
+		.searchLocationOverlay .btn-default{
+			background-color: #ffd900;
+    		width: 50%;
+    		color: #145dbc;
+    		font-size: 0.8rem;
+    		font-weight: bold;
+    		margin: 1rem 0.5rem 0.5rem 3rem;	
+		}
+		.fas{
+			background-color: #ffd900;
+			margin-right: 4px;
+		}
+		.container{
+			padding: 0;
+			display: grid;
+		}
+		.introduction,.breadcrumb, .breadcrumb-item{
+			background-color: #e4f5f7;
+			margin-bottom: 0;
+		}
+		.breadcrumb-item + .breadcrumb-item::before {
+        	content: ">";
+        	font-size: 1rem;
+			font-weight: normal;
+			color: #9ea3a0;
+    	}
+    	.breadcrumb-item a{
+    		font-size: 0.8rem;
+			font-weight: normal;
+			color: #9ea3a0;	
+    	}
+    	.breadcrumb-item.active
+    	{
+    		font-size: 0.8rem;
+			font-weight: bold;
+			color: #444444;
+			letter-spacing: 0.5px;	
+    	}
+    	.fdiv1{
+    		background-color: #FFF;
+    		position: absolute;
+    		top: 26rem;
+    		left: 0px;
+    		height: 3.5rem;
+    		width: 10rem;
+    		z-index: 99;
+    		border-radius: 3px;
+    		box-shadow: 2px 2px #EEE;
+    		font-size: 0.75rem;
+    		font-weight: bold;
+    		color: #145dbc;
+    	}
+    	.fdiv1 a,
+    	.fdiv1 a:hover{
+    		line-height: 1.4;
+    		text-align: left;
+    		text-decoration: none;
+    	}
+    	.fdiv2{
+    		background-color: #FFF;
+    		position: absolute;
+    		top: 14rem;
+    		right: 0px;
+    		height: 5rem;
+    		width: 4.5rem;
+    		z-index: 99;
+    		border-radius: 3px;
+    		box-shadow: 2px 2px #EEE;
+    	}
+    	.fdiv3{
+    		background-color: #FFF;
+    		position: absolute;
+    		top: 20rem;
+    		right: 0px;
+    		height: 5rem;
+    		width: 4.5rem;
+    		z-index: 99;
+    		border-radius: 3px;
+    		box-shadow: 2px 2px #EEE;
+    	}
+    	.protectPlus-content,
+    	.protectGuard-content
+    	{
+    		text-align: left;
+    		float: left;
+    		margin-top: -5rem;
+    		margin-left: 5rem;
+    		display: none;
+    	}
+    	.protectPlus-content h1,
+    	.protectGuard-content h1
+    	{
+    		font-size: 1.7rem;
+    		font-weight: bold;
+    		color: #145dbc;
+    	}
+    	#AFIB{
+    		background-color: #e4f5f7;
+    		padding: 0;
+    		margin: 0;
+    	}
+    	.AFIB-content{
+    		background-color: #e4f5f7;
+    		padding: 1rem;
+    		margin: 0;	
+    	}
+    	.AFIB-content h1{
+    		font-size: 2rem;
+    		font-weight: bold;
+    		background-color: #e4f5f7;
+    		color: #444444;
+    		letter-spacing: 1px;
+    	}
+    	.AFIB-content p{
+    		font-size: 0.8rem;
+    		font-weight: normal;
+    		background-color: #e4f5f7;
+    		color: #444444;
+    		letter-spacing: 0.3px;
+    		padding-top: 1rem;	
+    	}
+    	.AFIB-image{
+    		float: left;
+    	}
+    	.AFIB-benefits{
+    		background-color: #e4f5f7;
+    	}
+    	.AFIB-benefits p{
+    		background-color: #e4f5f7;
+    	}
+    	.AFIB-benefits small{
+    		font-size: 0.5rem;
+    		font-weight: normal;
+    		background-color: #e4f5f7;
+    		color: #444444;
+    		letter-spacing: 0.1px;
+    		padding-top: -1rem;	
+    	}
+    	#ContactForm{
+    		background-color: #fff;
+    		border-radius: 5px;
+    		margin-top: 1rem;
+    		margin-bottom: 1rem;
+       	}
+    	#ContactForm form{
+    		padding: 1rem;
+    	}
+    	#ContactForm label{
+    		color: #444444;
+    		font-size: 0.8rem;
+    		font-weight: bold;
+    		letter-spacing: 1px;
+    		margin-bottom: -2rem;
+    	}
+    	#ContactForm input{
+    		font-size: 1rem;
+    		color: #000;
+    		font-weight: bolder;
+    	}
+    	#ContactForm small{
+    		background-color: #FFF;
+    		font-size: 0.7rem; 
+    		font-weight: bold;
+    	}
+    	#ContactForm .btn-default
+    	{
+    		background-color: #ffd900;
+    		width: 100%;
+    		color: #145dbc;
+    		font-size: 0.8rem;
+    		font-weight: bold;
+    	}
+    	#cfCheck{
+    		margin-bottom: 0.5rem;
+    		padding-bottom: 0.5rem;
+    	}
+    	.plans{
+    		background-color: #FFF;
+    		margin: 7rem 0 1rem 0;
+    	}
+    	.plans-text{
+    		background-color: #e4f5f7;
+    		padding: 8rem 1rem 2rem 3rem;
+    		display: block;
+    		position: relative; 
+    		height: 100%;
+    		border-radius: 10px; 
+    	}
+    	.plans-text-image{
+    		position:absolute;
+  			height: 12rem;
+  			width: 12rem;
+  			border-radius: 12rem;
+  			border: 3px solid #e4f5f7;
+  			left: 45%;
+  			margin-left: -5rem;
+  			top: -5rem;
+  			background: #FFF;
+    	}
+    	.plans-text p{
+    		font-size: 0.8rem;
+    		font-weight: bold;
+    		letter-spacing: 0.2px;
+    	}
+    	.feedback{
+    		background-color: #e4f5f7;
+    		padding: 0 0 2rem 0;	
+    	}
+    	.feedback h1{
+    		padding-top: 2rem;
+    		font-size: 1.5rem;
+    		font-weight: bolder;
+    		color: #444444;
+    	}
+    	#feedbackCarousel{
+    		display: block;
+    		background-color: #FFF;	
+    		margin-top: 1.2rem;
+    		border-radius: 0.5rem;
+    		vertical-align: center;
+    	}
+    	.carousel-image{
+    		margin: 1rem 1rem 1rem 4rem;
+    		width: 10rem;
+    		height: 10rem;
+    		border-radius: 10rem;
+    	}
+    	.carousel-control-prev,
+    	.carousel-control-next{
+    		background-image: none;
+    		background-color: #FFF;
+    		height:3rem;
+    		width:3rem;
+    		border-radius: 3rem;
+    		margin-top: -0.5rem;
+    	}
+    	.carousel-control-prev-icon,
+    	.carousel-control-next-icon{
+    		color: #145dbc;
+    	}
+    	.fa-quote-left,
+    	.fa-quote-right{
+    		color: #a0a2a4 !important;
+    	}
+    	.fa-angle-left,
+    	.fa-angle-right{
+    		color: #145dbc !important;
+    		font-size: 2rem;
+    		background-color: #FFF;
+    		margin-top: -0.3rem;
+    	}
+    	.carousel-text p{
+    		font-size: 1rem;
+    		font-weight: normal;
+    		color: #444444;
+    		margin: 1rem;
+    	}
+    	.FAQ{
+    		background-color: #EEE;
+    		padding: 0 0 2rem 0;	
+    	}
+    	.FAQ h1{
+    		padding-top: 2rem;
+    		padding-bottom: 2rem;
+    		font-size: 1.5rem;
+    		font-weight: bolder;
+    		color: #444444;
+    	}
+    	.fa-plus,.fa-minus{
+    		background-color: #FFF;
+    		color: #145dbc;
+    		border: 1px solid #000;
+    	}
+    	.mb-0{
+    		font-size: 1rem;
+    		font-weight: bold;
+    		color: #444444;	
+    	}
+    	.assist{
+    		background-color: #e4f5f7;
+    		padding: 0 0 2rem 0;	
+    	}
+    	.assist h1{
+    		padding-top: 2rem;
+    		font-size: 1.5rem;
+    		font-weight: bolder;
+    		color: #444444;
+    	}
+    	.assist form{
+    		padding: 1rem;
+    	}
+    	.assist label{
+    		color: #444444;
+    		font-size: 0.8rem;
+    		font-weight: bold;
+    		letter-spacing: 1px;
+    		margin-bottom: -2rem;
+    	}
+    	.assist input{
+    		font-size: 1rem;
+    		color: #000;
+    		font-weight: bolder;
+    	}
+    	.assist .btn-default{
+    		background-color: #ffd900;
+    		width: 25%;
+    		color: #145dbc;
+    		font-size: 0.8rem;
+    		font-weight: bold;
+    	}
+    	.footer{
+    		background-color: #3b3b3b;
+    		padding-top: 3rem;
+    	}
+    	.footer p{
+    		font-size: 0.5rem;
+    		letter-spacing: 0.1px;
+    		font-weight: normal;
+    		color: #b5b5b5;
+    		padding-bottom: 0.1rem;
+    	}
+
+    	@media only screen and (max-width: 600px) {
+    		.plans .col-sm-12{
+    			padding: 1rem 2rem 6rem 2rem;
+    		}	
+		}
+		@media only screen and (min-width: 601px) and (max-width: 1020px) {
+    		.plans .col-md-6{
+    			padding: 1rem 2rem 6rem 2rem;
+    		}	
+		}
+	</style>
+</head>
+<body>
+	<nav class="navbar navbar-expand-lg navbar-light navbar-custom">
+		<div class="container">
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerList">
+    			<span class="navbar-toggler-icon"></span>
+  			</button>
+  			<a class="navbar-brand" href="index.html">
+    			<img src="images/logo.jpg" class="d-inline-block" alt="Brand Logo">
+    		</a>
+  			<div class="collapse navbar-collapse" id="navbarTogglerList">
+    			<ul class="navbar-nav">
+      				<li class="nav-item">
+        				<a class="nav-link" href="#">About Us</a>
+      				</li>
+      				<li class="nav-item">
+        				<a class="nav-link" href="#">Why Insurance</a>
+      				</li>
+      				<li class="nav-item">
+        				<a class="nav-link" href="#">Our Products</a>
+      				</li>
+      				<li class="nav-item">
+        				<a class="nav-link" href="#">Customer Service</a>
+      				</li>
+      				<li class="nav-item">
+        				<a class="nav-link" href="#">Aviva Guidance</a>
+      				</li>
+      				<li class="nav-item">
+        				<a class="nav-link" href="#">FAQs</a>
+      				</li>
+    			</ul>
+    		</div>
+  			<form class="form-inline">
+      			<a href="#"><i class="fas fa-search"></i>Search</a>
+      			<a href="#" class="searchBranch"><i class="fas fa-map-marker-alt"></i>Branch Locator</a>
+      			<div class="searchLocationOverlay">
+      				<form>
+      					<div class="form-group">
+      						<select class="form-control" name="location" id="location">
+                            </select>
+      						<button type="submit" class="btn btn-default">Search</button>
+      					</div>
+      				</form>
+      			</div>
+    		</form>	
+  		</div>
+  	</nav>	
+	<section class="introduction container-fluid">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12 col-lg-6" id="AFIB">
+					<nav aria-label="breadcrumb">
+  						<ol class="breadcrumb">
+    						<li class="breadcrumb-item"><a href="#">Home</a></li>
+    						<li class="breadcrumb-item"><a href="#">Online Plans</a></li>
+    						<li class="breadcrumb-item active" aria-current="page">Aviva Family Income Builder</li>
+  						</ol>
+					</nav>
+					<article class="AFIB-content">
+						<h1>Aviva Family Income Builder</h1>
+						<p>More than just a term plan, choose the most suitable plan, amongst the four plan options to secure what's most important to you - your family</p>
+						<div class="AFIB-benefits">
+							<div class="row">
+								<div class="col-md-12 col-lg-6">
+									<p><img src="images/plan1.jpg" class="AFIB-image">Option to increase life cover during policy term</p>
+								</div>
+								<div class="col-md-12 col-lg-6">
+									<p><img src="images/plan2.jpg" class="AFIB-image">Choose the most suitable coverage amongst the four plans</p>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-12 col-lg-6">
+									<p><img src="images/plan3.jpg" class="AFIB-image">*Get tax benefits under 80(C), 10(10D)</p>
+								</div>
+							</div>	
+						</div>
+						<small>*Tax benefits as per existing tax laws which are subject to change</small>
+					</article>	
+				</div>
+				<div class="col-md-12 offset-md-0 col-lg-4 offset-lg-2" id="ContactForm">
+					<form>
+						<header>Your Personal Details</header>
+  						<div class="form-group">
+    						<label for="cfName">Name</label>
+    						<input type="text" class="form-control" id="cfName">
+  						</div>
+  						<div class="form-group">
+    						<label for="cfContact">Contact No.</label>
+    						<input type="text" pattern="[6789][0-9]{9}" minlength="10" maxlength="10" class="form-control" id="cfContact">
+  						</div>
+  						<div class="form-group">
+    						<label for="cfEmail">Email</label>
+    						<input type="email" class="form-control" id="cfEmail">
+  						</div>
+  						<div class="form-group form-check">
+    						<input type="checkbox" class="form-check-input" id="cfCheck">
+    						<label class="form-check-label" for="cfCheck"><small>Clicking on calculate premium I agree <a href="#" style="text-decoration: none; font-size: 0.8rem;">T&C</a></small></label>
+  						</div>
+  						<button type="submit" class="btn btn-default">Calculate Premium</button>
+					</form>
+				</div>
+				<div class="fdiv2">
+					<a href="#" class="protectPlus">
+						<img src="images/protect_plus.jpg" style="float: left;">
+					</a>
+					<div class="protectPlus-content">
+						<h1> Protect Plus</h1>
+						<p>Life Cover inbuilt accidental death insurance benefits.<br/>
+						<b><a href="#">View Details</a></b></p>
+					</div>
+				</div>
+				<div class="fdiv3">
+					<a href="#" class="protectGuard">
+						<img src="images/protect_guard.jpg" style="float: left;">
+					</a>
+					<div class="protectGuard-content">
+						<h1> Protect Guard</h1>
+						<p>Life Cover inbuilt accidental death insurance benefits.<br/>
+						<b><a href="#">View Details</a></b></p>
+					</div>
+				</div>	
+			</div>			
+		</div>
+	</section>
+	<div class="fdiv1"><img src="images/resumeApplication.png" style="float:left; margin-top: 0.5rem; margin-right: 0.25rem;"><a href="#">Resume Application</a></div>
+	<section class="plans container-fluid">
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-12 col-md-6 col-lg-4">
+					<div class="plans-text">
+						<div class="plans-text-image">
+							<img src="images/ben1.jpg" style="height: 148px; width: 87px; margin-left: 3.0rem; margin-top: 1.25rem;">
+						</div>
+						<p>Let's assume that you are 30 years old today and a non-smoker and you have chosen this option with policyterm of 30 years.
+						</p>
+						<p>You pay a premium of &#8377; 1 Lac every year for the next 12 years</p>
+					</div>
+				</div>
+				<div class="col-sm-12 col-md-6 col-lg-4">
+					<div class="plans-text">
+						<div class="plans-text-image">
+							<img src="images/ben2.jpg"style="height: 137px; width: 123px; margin-left: 2.1rem; margin-top: 1.5rem;">
+						</div>
+						<p>When you turn 42 years old, you would have paid premium of &#8377; 12 lacs</p>
+						<p>However, in this plan during your age span between 43 to 53 years, ie for the next 11 years, you get &#8377; 1.5 lacs every year</p>
+					</div>
+				</div>
+				<div class="col-sm-12 col-md-6 col-lg-4">
+					<div class="plans-text">
+						<div class="plans-text-image">
+							<img src="images/ben3.jpg"style="height: 123px; width: 135px; margin-left: 1.6rem; margin-top: 2.1rem;">
+						</div>
+						<p>When you turn 54, you get additional of &#8377; 7.5 Lacs</p>
+						<p>This equals to &#8377; 24 Lacs at maturity</p>
+					</div>
+				</div>
+			</div>
+			<div style="text-align: right; margin-top: 0.5rem; font-size: 1rem; color: #145dbc;">
+				<span><img src="images/downloadBrochure.png"><a href="#">Download Brochure</a></span>
+				<span><img src="images/seeTerms.png"><a href="#">See Terms</a></span>
+			</div>
+		</div>
+	</section>
+	<section class="feedback container-fluid">
+		<div class="container">
+			<div style="text-align: center;">
+				<h1>The highest standards, the happiest customers</h1>	
+			</div>
+			<div class="row">
+				<div class="col-sm-2" style="position: relative; top: 50%;">
+					<a class="carousel-control-prev" href="#feedbackCarousel" role="button" data-slide="prev">
+    					<span class="carousel-control-prev-icon" aria-hidden="true">
+    						<i class="fas fa-angle-left"></i>
+    					</span>
+    					<span class="sr-only">Previous</span>
+  					</a>
+  					<hr style="height: 1px; background-color: #145dbc; margin-left: 3rem; margin-right: -4rem;">	
+				</div>
+				<div class="col-sm-8">
+					<div id="feedbackCarousel" class="carousel slide" data-ride="carousel">
+  						<div class="carousel-inner">
+    						<div class="carousel-item active">
+    							<div style="width: 25%; float:left;">
+    								<img src="images/img1.jpg" class="carousel-image">
+    							</div>
+      							<div class="carousel-text" style="width: 75%; float:left; padding:1rem 5rem 1rem 5rem;">
+      								<div>
+      									<i class="fa fa-quote-left" style="float: left; margin: 0 0.5rem 1rem 0;"></i>
+      									<p>I bought i-Life Tota insurance online after seeing its benefits. I am very happy to buy this insurance. Also, the process to buy it online was very easy and less time consuming.
+      									<i class="fa fa-quote-right" style="float: right; margin-top: 1rem;"></i><br /><br />
+      									<em><b>Ananya Singh</b></em></p>
+      								</div>
+      							</div>
+    						</div>
+    						<div class="carousel-item">
+      							<div style="width: 25%; float:left;">
+    								<img src="images/test2.jpg" class="carousel-image">
+    							</div>
+      							<div class="carousel-text" style="width: 75%; float:left; padding:1rem 5rem 1rem 5rem;">
+      								<div>
+      									<i class="fa fa-quote-left" style="float: left; margin: 0 0.5rem 1rem 0;"></i>
+      									<p>I bought i-Life Tota insurance online after seeing its benefits. I am very happy to buy this insurance. Also, the process to buy it online was very easy and less time consuming.
+      									<i class="fa fa-quote-right" style="float: right; margin-top: 1rem;"></i><br /><br />
+      									<em><b>Mohit Thakur</b></em></p>
+      								</div>
+      							</div>
+    						</div>
+    						<div class="carousel-item">
+      							<div style="width: 25%; float:left;">
+    								<img src="images/test3.jpeg" class="carousel-image">
+    							</div>
+      							<div class="carousel-text" style="width: 75%; float:left; padding:1rem 5rem 1rem 5rem;">
+      								<div>
+      									<i class="fa fa-quote-left" style="float: left; margin: 0 0.5rem 1rem 0;"></i>
+      									<p>I bought i-Life Tota insurance online after seeing its benefits. I am very happy to buy this insurance. Also, the process to buy it online was very easy and less time consuming.
+      									<i class="fa fa-quote-right" style="float: right; margin-top: 1rem;"></i><br /><br />
+      									<em><b>Radha Kumar</b></em></p>
+      								</div>
+      							</div>
+    						</div>
+  						</div>  				
+					</div>
+				</div>
+				<div class="col-sm-2" style="position: relative; top: 50%;">
+					<a class="carousel-control-next" href="#feedbackCarousel" role="button" data-slide="next">
+    					<span class="carousel-control-next-icon" aria-hidden="true"></span>
+    					<i class="fas fa-angle-right" style="margin-left: -1rem;"></i>
+    					<span class="sr-only">Next</span>
+  					</a>
+  					<hr style="height: 1px; background-color: #145dbc; margin-left: -2rem; margin-right: 3rem;">
+				</div>
+			</div>
+			
+		</div>
+	</section>
+	<section class="FAQ container-fluid">
+		<div class="container">
+			<div style="text-align: center;">
+				<h1>FAQs</h1>
+			</div>
+			<div style="text-align: left;">
+				<div class="accordion" id="accordionExample">
+  					<div class="card">
+    					<div class="card-header" id="headingOne">
+      						<h2 class="mb-0">
+      							What is Term Plan?
+      							<div style="text-align: right; margin-top: -1.7rem;">
+      								<button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne"><i class="fas fa-plus"></i></button>
+      							</div>
+      						</h2>
+    					</div>
+    					<div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+      						<div class="card-body">
+        					Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+      						</div>
+    					</div>
+  					</div>
+  					<div class="card">
+    					<div class="card-header" id="headingTwo">
+      						<h2 class="mb-0">
+      							Why should I buy a Term Plan?
+      							<div style="text-align: right; margin-top: -1.7rem;">
+        							<button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo"><i class="fas fa-plus"></i></button>
+        						</div>
+      						</h2>
+    					</div>
+    					<div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+      						<div class="card-body">
+        					Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+      						</div>
+    					</div>
+  					</div>
+  					<div class="card">
+    					<div class="card-header" id="headingThree">
+      						<h2 class="mb-0">
+        						What is the difference between buying a Term Plan Online vs Offline?
+        						<div style="text-align: right; margin-top: -1.7rem;">
+        							<button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree"><i class="fas fa-plus"></i></button>
+        						</div>
+      						</h2>
+    					</div>
+    					<div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+      						<div class="card-body">
+        					Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+      						</div>
+    					</div>
+  					</div>
+				</div>	
+			</div>
+		</div>
+	</section>
+	<section class="assist container-fluid">
+		<div class="container">
+			<div style="text-align: center;">
+				<h1>We are always there to assist you</h1>	
+			</div>
+			<form>
+				<div class= "form-row">
+					<div class="col-sm-12 col-md-4">
+						<div class="form-group mb-2">
+    						<label for="fiName">Name</label>
+    						<input type="text" class="form-control" id="fiName">
+  						</div>
+					</div>
+					<div class="col-sm-12 col-md-4">
+						<div class="form-group mb-2">
+    						<label for="fiContact">Contact No.</label>
+    						<input type="text" pattern="[6789][0-9]{9}" minlength="10" maxlength="10" class="form-control" id="fiContact">
+  						</div>		
+					</div>
+					<div class="col-sm-12 col-md-4">
+						<div class="form-group mb-2">
+    						<label for="fiEmail">Email</label>
+    						<input type="email" class="form-control" id="fiEmail">
+  						</div>		
+					</div>
+				</div>
+				<div style="text-align: center;">
+					<button type="submit" class="btn btn-default">Let's Connect</button>
+				</div>  				
+			</form>
+		</div>
+	</section>
+	<footer class="footer container-fluid">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12 col-lg-6">
+					<p>The name of the Aviva Product/Plan does not in any way indicate the quality of the insurance contract, its future prospects or returns. For more details on risk factors, terms and conditions please read sales brochure carefully before concluding a sale. Riders are not mandatory and are available for a nominal extra cost. Please read respective rider brochure before taking a decision.</p>
+					<p>The various funds offered under Unit Linked Insurance contract are the names of the funds and do not in any way indicate the quality of these plans, their future prospects and returns. Unit Linked Funds are subject to market risks and there is no assurance or guarantee that the objective of the investment fund will be achieved.Past performance of the investment funds do not indicate the future performance of the same.</p>
+					<p>Tax benefits are as per the prevailing Income Tax Act, 1961 and are subject to change from time to time.</p>
+					<p style="border: 1px solid #b5b5b5; padding: 1rem;">BEWARE OF SPURIOUS/FRAUD. IRDAI is not involved in activities like selling insurance policies, announcing bonus or investment of premium. Public receiving such phone calls are requested to lodge a complaint.</p>
+				</div>
+				<div class="col-md-12 col-lg-6">
+					<p><span style="font-size: 0.7rem; letter-spacing: 0.2px; font-weight: normal;">Aviva Life Insurance Company</span><br/>
+					A joint venture between Dabur Invest Corp and International Holding Limited.</p>
+					<div class="row">
+						<div class="col-lg-4">
+							<p><span style="font-size: 0.7rem; letter-spacing: 0.2px; font-weight: normal;">Registered Office</span><br /> <br />
+								2nd Floor,<br />
+								Prakashdeep Building,<br />
+								7 Tolstoy Marg,<br />
+								New Delhi-110030<br />
+								Delhi,India<br />
+							</p>
+						</div>
+						<div class="col-lg-4">
+							<p><span style="font-size: 0.7rem; letter-spacing: 0.2px; font-weight: normal;">Corporate Office</span><br /> <br />
+								Aviva Tower, Sector Road,<br />
+								Opposite Golf Course,<br />
+								DLF Phase-V, Sector-43,<br />
+								Gurugram - 122003,<br />
+								Haryana, India<br />
+							</p>
+						</div>
+						<div class="col-lg-4">
+							<p><span style="font-size: 0.7rem; letter-spacing: 0.2px; font-weight: normal;">Contact Us</span><br /> <br />
+								Phone: 0124-2709000/46<br />
+								Email: customerservices@avivaindia.com<br />
+								Toll Free Helpline: 18001037766<br />
+								SMS "Aviva" to 567673<br />
+							</p>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-lg-5">
+							<p><span style="font-size: 0.6rem; letter-spacing: 0.2px; font-weight: normal;">IRDAI Registration No: 122<br />
+								CIN: U66010DL2000PLC107880<br /></span>
+							</p>
+						</div>
+						<div class="col-lg-7">
+							<p><span style="font-size: 0.6rem; letter-spacing: 0.2px; font-weight: normal;"> UIN: 122N131V01<br />
+								AN: Jul 10/18<br /></span>
+							</p>
+						</div>
+					</div>
+					<p>Trade logo displayed above belongs to Aviva Brands Limited and is used by Aviva Life Insurance Company India Limited under License.</p>
+					<p>&copy; 2018 Aviva India | www.aviva.com</p>
+				</div>
+			</div>
+		</div>		
+	</footer>
+<!-- EXTERNAL JS -->
+<script type="text/javascript" src="files/jquery-3.4.1.min.js"></script>
+<script type="text/javascript" src="files/bootstrap-4.4.1/js/bootstrap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.0.12/dist/js/select2.min.js"></script>
+<!-- INTERNAL JS -->
+<script type="text/javascript">
+	$('.searchBranch').on('click', function(){
+		$('.searchLocationOverlay').css('display', 'block');
+	})
+	$('.protectPlus').on('mouseover', function(){
+		$('.fdiv2').css('width','25rem');
+		$('.fdiv2').css('height','7rem');
+		$('.protectPlus-content').css('display', 'block');
+	});
+	$('.protectPlus').on('mouseout', function(){
+		$('.fdiv2').css('width','4.5rem');
+		$('.fdiv2').css('height','5rem');
+		$('.protectPlus-content').css('display', 'none');
+	});
+	$('.protectGuard').on('mouseover', function(){
+		$('.fdiv3').css('width','25rem');
+		$('.fdiv3').css('height','7rem');
+		$('.protectGuard-content').css('display', 'block');
+	});
+	$('.protectGuard').on('mouseout', function(){
+		$('.fdiv3').css('width','4.5rem');
+		$('.fdiv3').css('height','5rem');
+		$('.protectGuard-content').css('display', 'none');
+	});
+	$('#cfCheck').prop("checked", true);
+	/* Get Airline Codes */
+      let dropdown = document.getElementById('location');
+      dropdown.length = 0;
+
+      let defaultOption = document.createElement('option');
+      defaultOption.text = 'Choose City, Country';
+
+      dropdown.add(defaultOption);
+      dropdown.selectedIndex = 0;
+
+      const urlLocation = 'https://restcountries.eu/rest/v1/all';
+
+      const request = new XMLHttpRequest();
+      request.open('GET', urlLocation, true);
+
+      request.onload = function() {
+        if (request.status === 200) {
+        const data = JSON.parse(request.responseText);
+        let option;
+          for (let i = 0; i < data.length; i++) {
+            option = document.createElement('option');
+            option.text = data[i].alpha2Code +" - " +data[i].name;
+            option.value = data[i].alpha2Code;
+            dropdown.add(option);
+          }
+        } else {
+          // Reached the server, but it returned an error
+        }   
+      };
+      request.onerror = function() {
+        console.error('An error occurred fetching the JSON from ');
+      };
+      request.send();
+      $('#location').select2();
+	$(document).ready(function(){
+    	$('.collapse').on('shown.bs.collapse', function(){
+			$(this).parent().find(".fa-plus").removeClass("fa-plus").addClass("fa-minus");
+			}).on('hidden.bs.collapse', function(){
+			$(this).parent().find(".fa-minus").removeClass("fa-minus").addClass("fa-plus");
+		});
+	});
+</script>
+</body>
+</html>
